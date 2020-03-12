@@ -1,5 +1,5 @@
 {
-  "name": "tiny-delay",
+  "name": "proper-delay",
   "version": "0.0.1",
   "description": "A promise based timing functions implementation. (timeout / interval).",
   "main": "app/dist/tinyDelay.js",
@@ -15,11 +15,11 @@
     "url": "git+https://github.com/maximilianMairinger/tinyDelay.git"
   },
   "keywords": [
-  "tiny",
-  "delay",
-  "interval",
-  "timeout"
-],
+    "tiny",
+    "delay",
+    "interval",
+    "timeout"
+  ],
   "author": "Maximilian Mairinger",
   "license": "ISC",
   "bugs": {
@@ -41,5 +41,8 @@
     "webpack-cli": "^3.3.10",
     "webpack-inject-plugin": "^1.5.2",
     "webpack-merge": "^4.2.2"
+  },
+  "dependencies": {
+    "xrray": "^4.6.4"
   }
 }
