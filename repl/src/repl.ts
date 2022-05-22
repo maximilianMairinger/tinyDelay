@@ -1,4 +1,4 @@
-import tinyDelay from "./../../app/src/tinyDelay"
+import tinyDelay from "../../app/src/tinyDelay"
 import timoi from "timoi"
 import { Data } from "josm"
 

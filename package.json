@@ -2,13 +2,26 @@
   "name": "proper-delay",
   "version": "0.0.1",
   "description": "Changeable and cancelable promise based delay / setTimeout implementation.",
-  "main": "app/dist/tinyDelay.js",
-  "types": "app/dist/tinyDelay.d.ts",
+  "main": "./app/dist/esm/tinyDelay.js",
+  "types": "./app/dist/esm/tinyDelay.d.ts",
+  "exports": {
+    "node": {
+      "import": "./app/dist/esm/tinyDelay.js",
+      "require": "./app/dist/cjs/tinyDelay.js"
+    },
+    "default": "./app/dist/esm/tinyDelay.js"
+  },
   "scripts": {
-    "build": "tsc -p ./tsconfig.prod.json",
-    "dev": "webpack --config webpack.dev.config.js",
-    "deploy": "npm run build && npm publish",
-    "test": "node ./test/dist/test-bundle"
+    "build": "npm run buildESM; npm run buildCJS",
+    "buildESM": "tsc -p ./tsconfig.prod.esm.json",
+    "buildCJS": "tsc -p ./tsconfig.prod.cjs.json",
+    "dev": "npm run webDev",
+    "webDev": "rollup --config rollup.web.dev.config.js -w",
+    "nodeDev": "rollup --config rollup.node.dev.config.js -w",
+    "deploy": "npm run test && npm run build && npm publish",
+    "repl": "node repl/dist/josm-repl.js",
+    "buildTest": "rollup --config rollup.node.test.config.js",
+    "test": "npm run buildTest && jest"
   },
   "repository": {
     "type": "git",
@@ -30,12 +43,17 @@
   },
   "homepage": "https://github.com/maximilianMairinger/tinyDelay#readme",
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^22.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@rollup/plugin-typescript": "^8.3.2",
     "@types/long-timeout": "^0.1.0",
     "@types/node": "^12.6.9",
     "@types/tween.js": "^17.2.0",
     "css-loader": "^2.1.0",
     "cssnano": "^4.1.8",
     "postcss-loader": "^3.0.0",
+    "rollup": "^2.74.1",
     "terser-webpack-plugin": "^1.2.2",
     "timoi": "^1.1.6",
     "to-string-loader": "^1.1.6",
