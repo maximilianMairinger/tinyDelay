@@ -1,39 +1,64 @@
-import { Data } from "./dataTemp"
+import { Data } from "josm"
+import { setTimeout, clearTimeout, Timeout } from "long-timeout"
+import { CancelAblePromise } from "animation-frame-delta"
 
-export abstract class TimeUnit extends Data<number> {
-  constructor(time: number) {
-    super(undefined)
-    this.set(this.toMs(time))
-  }
-  public abstract toMs(time: number): number
+export function now() {
+  return Date.now()
 }
 
-export class Second extends TimeUnit {
-  constructor(time: number) {
-    super(time)
+export function delay(ms: number | Data<number>, done?: () => void) {
+  let cancelFunc: Function
+  const prom = new CancelAblePromise((res) => {
+    if (!done) done = res
+    else {
+      const oldDone = done
+      done = () => {
+        oldDone()
+        res()
+      }
+    }
+
+
+    
+    if (ms instanceof Data) {
+      const startTime = now()
+      let timeout: Timeout
+
+      function setNewTimeout(ms: number) {
+        const timeDelta = now() - startTime
+        timeout = setTimeout(done, ms - timeDelta)
+      }
+
+      const sub = ms.get((ms) => {
+        clearTimeout(timeout)
+        setNewTimeout(ms)
+      }, false)
+
+      setNewTimeout(ms.get())
+
+      cancelFunc = () => {
+        sub.deactivate()
+        clearTimeout(timeout)
+      }
+    }
+    else {
+      const timeout = setTimeout(done, ms)
+      cancelFunc = () => {
+        clearTimeout(timeout)
+      }
+    }
+  }, undefined)
+
+  prom.cancel = () => {
+    cancelFunc()
+    prom.cancel = () => false
+    return true
   }
-  public toMs(time: number): number {
-    return time / 1000
-  }
+  
+
+  return prom
 }
 
-
-
-
-
-export function delay(ms_timeUnit: number | TimeUnit) {
-  if (ms_timeUnit instanceof TimeUnit) {
-
-  }
-
-  setTimeout(() => {
-
-  })
-}
-
-export function interval() {
-
-}
 
 export default delay
 export const timeout = delay

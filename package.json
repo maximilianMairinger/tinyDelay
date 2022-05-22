@@ -27,12 +27,14 @@
   },
   "homepage": "https://github.com/maximilianMairinger/tinyDelay#readme",
   "devDependencies": {
+    "@types/long-timeout": "^0.1.0",
     "@types/node": "^12.6.9",
     "@types/tween.js": "^17.2.0",
     "css-loader": "^2.1.0",
     "cssnano": "^4.1.8",
     "postcss-loader": "^3.0.0",
     "terser-webpack-plugin": "^1.2.2",
+    "timoi": "^1.1.6",
     "to-string-loader": "^1.1.6",
     "ts-loader": "^5.3.3",
     "typescript": "^3.5.2",
@@ -43,6 +45,8 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
-    "xrray": "^4.6.4"
+    "animation-frame-delta": "^2.8.0",
+    "josm": "^1.7.20",
+    "long-timeout": "^0.1.1"
   }
 }
