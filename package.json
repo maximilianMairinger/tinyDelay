@@ -1,7 +1,7 @@
 {
   "name": "proper-delay",
   "version": "0.0.1",
-  "description": "A promise based timing functions implementation. (timeout / interval).",
+  "description": "Changeable and cancelable promise based delay / setTimeout implementation.",
   "main": "app/dist/tinyDelay.js",
   "types": "app/dist/tinyDelay.d.ts",
   "scripts": {
@@ -17,8 +17,11 @@
   "keywords": [
     "tiny",
     "delay",
-    "interval",
-    "timeout"
+    "timeout",
+    "promise",
+    "setTimeout",
+    "changeable",
+    "cancelable"
   ],
   "author": "Maximilian Mairinger",
   "license": "ISC",
