@@ -1,5 +1,5 @@
 {
-  "name": "proper-delay",
+  "name": "tiny-delay",
   "version": "1.0.0",
   "description": "Changeable and cancelable promise based delay / setTimeout implementation.",
   "main": "./app/dist/esm/tinyDelay.js",
