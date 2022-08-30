@@ -20,7 +20,7 @@ export function delay(ms: number | Data<number>, done?: () => void) {
     // todo: check without using Data. No need to import everything
     if (ms instanceof Data) {
       const startTime = now()
-      let timeout: Timeout
+      let timeout: number
 
       function setNewTimeout(ms: number) {
         const timeDelta = now() - startTime
