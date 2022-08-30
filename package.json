@@ -19,7 +19,7 @@
     "webDev": "rollup --config rollup.web.dev.config.js -w",
     "nodeDev": "rollup --config rollup.node.dev.config.js -w",
     "deploy": "npm run test && npm run build && npm publish",
-    "repl": "node repl/dist/josm-repl.js",
+    "repl": "node repl/dist/tinyDelay-repl.js",
     "buildTest": "rollup --config rollup.node.test.config.js",
     "test": "npm run buildTest && jest"
   },
@@ -54,16 +54,11 @@
     "cssnano": "^4.1.8",
     "postcss-loader": "^3.0.0",
     "rollup": "^2.74.1",
-    "terser-webpack-plugin": "^1.2.2",
     "timoi": "^1.1.6",
     "to-string-loader": "^1.1.6",
     "ts-loader": "^5.3.3",
     "typescript": "^3.5.2",
-    "url-loader": "^1.1.2",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10",
-    "webpack-inject-plugin": "^1.5.2",
-    "webpack-merge": "^4.2.2"
+    "url-loader": "^1.1.2"
   },
   "dependencies": {
     "animation-frame-delta": "^2.8.0",

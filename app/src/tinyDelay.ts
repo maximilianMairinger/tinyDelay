@@ -1,10 +1,8 @@
 import { Data } from "josm"
 import { setTimeout, clearTimeout, Timeout } from "long-timeout"
-import { CancelAblePromise } from "animation-frame-delta"
+import { CancelAblePromise, now } from "animation-frame-delta"
 
-export function now() {
-  return Date.now()
-}
+
 
 export function delay(ms: number | Data<number>, done?: () => void) {
   let cancelFunc: Function
@@ -19,7 +17,7 @@ export function delay(ms: number | Data<number>, done?: () => void) {
     }
 
 
-    
+    // todo: check without using Data. No need to import everything
     if (ms instanceof Data) {
       const startTime = now()
       let timeout: Timeout
