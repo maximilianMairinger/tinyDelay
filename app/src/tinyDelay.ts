@@ -1,5 +1,5 @@
 import { Data } from "josm"
-import { setTimeout, clearTimeout, Timeout } from "long-timeout"
+const { setTimeout, clearTimeout, Timeout } = require("long-timeout")
 import { CancelAblePromise, now } from "animation-frame-delta"
 
 
