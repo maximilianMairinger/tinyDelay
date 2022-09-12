@@ -1,7 +1,6 @@
 import { Data } from "josm"
-const { setTimeout, clearTimeout, Timeout } = require("long-timeout")
+import { setTimeout, clearTimeout, Timeout } from "long-timeout"
 import { CancelAblePromise, now } from "animation-frame-delta"
-
 
 
 export function delay(ms: number | Data<number>, done?: () => void) {
@@ -20,7 +19,7 @@ export function delay(ms: number | Data<number>, done?: () => void) {
     // todo: check without using Data. No need to import everything
     if (ms instanceof Data) {
       const startTime = now()
-      let timeout: number
+      let timeout: Timeout
 
       function setNewTimeout(ms: number) {
         const timeDelta = now() - startTime
