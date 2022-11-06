@@ -62,7 +62,6 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    "animation-frame-delta": "^2.8.0",
     "josm": "^1.7.20",
     "long-timeout": "^0.1.1"
   }

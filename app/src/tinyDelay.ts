@@ -1,8 +1,15 @@
 import { Data } from "josm"
 import { setTimeout, clearTimeout, Timeout } from "long-timeout"
-import { CancelAblePromise } from "animation-frame-delta"
 
-const now = Date.now.bind(Date)
+export const now = Date.now.bind(Date)
+
+type SuccessfullyRemoved = boolean
+
+export class CancelAblePromise extends Promise<void> {
+  constructor(f: (resolve: (value?: void | PromiseLike<void>) => void, reject: (reason?: any) => void) => void, public cancel: () => SuccessfullyRemoved) {
+    super(f)
+  }
+}
 
 export function delay(ms: number | Data<number>, done?: () => void) {
   let cancelFunc: Function
