@@ -1,7 +1,8 @@
 import { Data } from "josm"
 import { setTimeout, clearTimeout, Timeout } from "long-timeout"
-import { CancelAblePromise, now } from "animation-frame-delta"
+import { CancelAblePromise } from "animation-frame-delta"
 
+const now = Date.now.bind(Date)
 
 export function delay(ms: number | Data<number>, done?: () => void) {
   let cancelFunc: Function
