@@ -1,6 +1,6 @@
 {
   "name": "tiny-delay",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Changeable and cancelable promise based delay / setTimeout implementation.",
   "main": "./app/dist/esm/tinyDelay.mjs",
   "types": "./app/dist/esm/tinyDelay.d.ts",
