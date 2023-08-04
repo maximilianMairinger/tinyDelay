@@ -1,12 +1,11 @@
 {
   "compilerOptions": {
-    "module": "es2020",
-    "target": "es2019",
+    "module": "esnext",
+    "target": "esnext",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "allowJs": true,
-    "skipLibCheck": true,
-    "noStrictGenericChecks": true
+    "skipLibCheck": true
   }
 }

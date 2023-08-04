@@ -5,14 +5,16 @@ import json from '@rollup/plugin-json'
 
 
 export default {
-  input: './repl/src/repl.ts',
+  input: 'repl/src/repl.ts',
   output: {
     file: 'repl/dist/tinyDelay-repl.js',
-    format: 'cjs'
+    format: 'cjs',
+    sourcemap: true
   },
+  sourcemap: true,
   plugins: [
-    typescript({tsconfig: "./tsconfig.dev.json", noEmitOnError: false, sourceMap: true}), 
-    resolve({modulesOnly: true, preferBuiltins: true}),
+    typescript({tsconfig: "./tsconfig.json", noEmitOnError: false, sourceMap: true}), 
+    resolve({browser: true}),
     commonJS({
       include: 'node_modules/**'
     }),

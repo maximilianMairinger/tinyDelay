@@ -2,17 +2,15 @@
   "compilerOptions": {
     "outDir": "./app/dist/cjs",
     "module": "CommonJS",
-    "target": "es2020",
-    "moduleResolution": "node",
+    "target": "esnext",
     "allowSyntheticDefaultImports": true,
+    "declaration": false,
     "resolveJsonModule": true,
     "allowJs": true,
-    "declaration": true,
     "skipLibCheck": true
   },
   "exclude": [
     "./test",
-    "./repl",
     "./app/dist"
   ],
   "include": [

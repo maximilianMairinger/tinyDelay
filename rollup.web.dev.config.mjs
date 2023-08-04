@@ -1,5 +1,5 @@
-import merge from "webpack-merge"
-import commonMod from "./rollup.node.common.config"
+import { merge } from "webpack-merge"
+import commonMod from "./rollup.web.common.config.mjs"
 
 
 export default merge(commonMod, {
