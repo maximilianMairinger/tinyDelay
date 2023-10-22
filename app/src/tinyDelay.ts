@@ -1,19 +1,16 @@
 import { Data } from "josm"
 import { setTimeout, clearTimeout, Timeout } from "long-timeout"
+import { CancelAblePromise } from "more-proms"
+export { CancelAblePromise } from "more-proms"
+
+
 
 export const now = Date.now.bind(Date)
 
-type SuccessfullyRemoved = boolean
-
-export class CancelAblePromise extends Promise<void> {
-  constructor(f: (resolve: (value?: void | PromiseLike<void>) => void, reject: (reason?: any) => void) => void, public cancel: () => SuccessfullyRemoved) {
-    super(f)
-  }
-}
 
 export function delay(ms: number | Data<number>, done?: () => void) {
   let cancelFunc: Function
-  const prom = new CancelAblePromise((res) => {
+  const prom = new CancelAblePromise<void>((res) => {
     if (!done) done = res
     else {
       const oldDone = done
@@ -24,8 +21,7 @@ export function delay(ms: number | Data<number>, done?: () => void) {
     }
 
 
-    // todo: check without using Data. No need to import everything
-    if (ms instanceof Data) {
+    if (typeof ms !== "number") {
       const startTime = now()
       let timeout: Timeout
 
@@ -52,13 +48,10 @@ export function delay(ms: number | Data<number>, done?: () => void) {
         clearTimeout(timeout)
       }
     }
-  }, undefined)
-
-  prom.cancel = () => {
+  }, () => {
     cancelFunc()
-    prom.cancel = () => false
     return true
-  }
+  })
   
 
   return prom
