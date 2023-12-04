@@ -60,3 +60,18 @@ export function delay(ms: number | Data<number>, done?: () => void) {
 
 export default delay
 export const timeout = delay
+
+
+export function isIdle(timeoutMs: number = 500) {
+  const idle = new Data(false)
+  let lastDelay = delay(timeoutMs)
+  function f() {
+    idle.set(false)
+    lastDelay.cancel()
+    lastDelay = delay(timeoutMs).then(() => {
+      idle.set(true)
+    })
+
+  }
+  return { idle, f }
+}
