@@ -1,4 +1,4 @@
-import { Data } from "josm"
+import { Data, DataCollection } from "josm"
 import { setTimeout, clearTimeout, Timeout } from "long-timeout"
 import { CancelAblePromise } from "more-proms"
 export { CancelAblePromise } from "more-proms"
@@ -62,7 +62,7 @@ export default delay
 export const timeout = delay
 
 
-export function isIdle(timeoutMs: number = 500) {
+export function isIdle(timeoutMs: number | Data<number> = 500) {
   const idle = new Data(false)
   let lastDelay = delay(timeoutMs)
   function f() {
@@ -75,3 +75,33 @@ export function isIdle(timeoutMs: number = 500) {
   }
   return { idle, f }
 }
+
+
+export function absoluteToDeltaTime(absTimeMs: number): number
+export function absoluteToDeltaTime(absTimeMs: Data<number>): Data<number>
+export function absoluteToDeltaTime(absTimeMs: number | Data<number>) {
+  const isTypeofNumber = typeof absTimeMs === "number"
+  const absTime = isTypeofNumber ? new Data(absTimeMs) : absTimeMs
+  const time = absTime.tunnel((absTime) => absTime - now())
+  return isTypeofNumber ? time.get() : time
+}
+
+
+export function decomposedAbsoluteToDeltaTime(durationTimeMs: number, startingTimeMs?: number): number
+export function decomposedAbsoluteToDeltaTime(durationTimeMs: number | Data<number>, startingTimeMs?: number | Data<number>): Data<number>
+export function decomposedAbsoluteToDeltaTime(durationTimeMs: number | Data<number>, startingTimeMs?: number | Data<number>) {
+  const isDurationTimeTypeofNumber = typeof durationTimeMs === "number"
+  const isStartingTimeTypeofNumber = typeof startingTimeMs === "number"
+  const durationTime = isDurationTimeTypeofNumber ? new Data(durationTimeMs) : durationTimeMs
+  const startingTime = isStartingTimeTypeofNumber ? new Data(startingTimeMs) : startingTimeMs
+
+  const absTime = new Data<number>()
+  new DataCollection(durationTime, startingTime).get((duration, beginTime) => {
+    absTime.set(beginTime + duration)
+  })
+
+  const time = absoluteToDeltaTime(absTime)
+
+  return isDurationTimeTypeofNumber && isStartingTimeTypeofNumber ? time.get() : time
+}
+
